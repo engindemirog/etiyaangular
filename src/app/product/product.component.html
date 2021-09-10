@@ -1,0 +1,71 @@
+<div *ngIf="loading==false; else loadingInfo">
+  <div>
+    <input type="text" [(ngModel)]="filterText" class="form-control" placeholder="arama ifadesi"/>
+    <span *ngIf="filterText" class="badge bg-primary">{{filterText}} {{"youSearched"|translate:"en"}}</span>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Ürün adı</th>
+        <th scope="col">Fiyatı</th>
+        <th scope="col">KDV'si</th>
+        <th scope="col">Stok Adedi</th>
+        <th scope="col">Açıklama</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products | filter:filterText">
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.categoryId}}</td>
+        <td>{{product.name | uppercase}}</td>
+        <td>{{product.unitPrice | currency:"EUR"}}</td>
+        <td>{{product.unitPrice | vat:10 | currency:"EUR"}}</td>
+        <td>{{product.unitsInStock}}</td>
+        <td>{{product.quantityPerUnit}}</td>
+        <td><button (click)="addToCart(product)" class="btn btn-sm btn-primary">Sepete ekle</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" (click)="getProductsByPage(pagingInfo.currentPage-1)">Previous</a></li>
+
+      <li *ngFor="let i of pageArray" class={{getCurrentPageStyle(i)}}><a (click)="getProductsByPage(i+1)" class="page-link">{{i + 1}}</a></li>
+
+      <li class="page-item"><a class="page-link" (click)="getProductsByPage(pagingInfo.currentPage+1)">Next</a></li>
+    </ul>
+  </nav>
+</div>
+
+<ng-template #loadingInfo>
+  <div class="spinner-grow text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-secondary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-danger" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-warning" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-light" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-dark" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</ng-template>
+
+

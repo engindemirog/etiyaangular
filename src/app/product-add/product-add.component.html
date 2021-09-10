@@ -1,0 +1,30 @@
+<div class="content">
+    <div class="col-md-12">
+        <form [formGroup]="productAddForm">
+            <div class="form-group">
+                <label>Ürün adı</label>
+                <input class="form-control" type="text" id="name" formControlName="name" placeholder="Ürün adı" />
+                <small *ngIf="productAddForm.get('name').hasError('required') && productAddForm.get('name').touched" class="form-text text-muted">
+                    Ürün adı zorunludur.
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Kategori</label>
+                <select name="categoryId" formControlName="categoryId" id="categoryId" class="form-control form-select">
+                    <option *ngFor="let category of categories" value={{category.id}}>{{category.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Birim Fiyatı</label>
+                <input class="form-control" type="number" id="unitPrice" formControlName="unitPrice"
+                    placeholder="Birim Fiyatı" />
+            </div>
+            <div class="form-group">
+                <label>Stok adedi</label>
+                <input class="form-control" type="number" id="unitsInStock" formControlName="unitsInStock"
+                    placeholder="Stok Adedi" />
+            </div>
+            <button [disabled]="!productAddForm.valid" class="btn btn-primary btn-fill" (click)="add()">Ürün ekle</button>
+        </form>
+    </div>
+</div>

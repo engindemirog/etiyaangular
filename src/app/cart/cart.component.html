@@ -1,0 +1,30 @@
+<div>
+    <table *ngIf="cartItems.length>0; else emptyCart" class="table">
+        <thead>
+            <tr>
+                <th>Ürün adı</th>
+                <th>Birim fiyatı</th>
+                <th>Açıklama</th>
+                <th>Stok Adedi</th>
+                <th>Sipariş Adedi</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cartItem of cartItems">
+
+                <td>{{cartItem.product.name}}</td>
+                <td>{{cartItem.product.unitPrice}}</td>
+                <td>{{cartItem.product.quantityPerUnit}}</td>
+                <td>{{cartItem.product.unitsInStock}}</td>
+                <td>{{cartItem.quantity}}</td>
+                <td><button class="btn btn-sm btn-primary" (click)="removeFromCart(cartItem.product)">Sepetten çıkar</button></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <ng-template #emptyCart>
+        Sepetiniz boş
+    </ng-template>
+</div>

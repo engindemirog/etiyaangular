@@ -1,0 +1,4 @@
+<ul class="list-group">
+    <li *ngFor="let category of categories" (click)="selectCategory(category)"
+     class="list-group-item" aria-current="true">{{category.name}}</li>
+</ul>
